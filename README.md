@@ -1,2 +1,2 @@
-# game-with-javascript
+# vanillaJS Game
 Build simple games with vanillaJS
