@@ -1,0 +1,63 @@
+td{
+    border: 2px solid #372c25;
+    border-radius: 9px;
+    text-align: center;
+    vertical-align: center;
+    font-size: 18pt;
+    font-weight: bold;
+    height: 70px;
+    width: 70px;
+    color: #684A23;
+    background-color: #FBEDDC;
+}
+p{
+    color: white;
+    vertical-align: top;
+}
+body{
+    background-color: #372C25;
+}
+#title{
+    color: white;
+    font-size: 48px;
+    padding: 0px;
+    margin: 0px;
+}
+#titleBar{
+    margin-left: 70px;
+    margin-top: 35px;
+    height: 70px;
+}
+#titlePad{
+    width: 148px;
+    height: 35px;
+    background-color: #372C25;
+    margin: 0px;
+}
+#scorePad{
+    width: 148px;
+    height: 35px;
+    background-color: #46382E;
+    padding: 0px;
+    margin: 0px;
+}
+#scoreType{
+    font-size: 14pt;
+    margin: 0px;
+    color: #715541;
+}
+#score{
+    font-size: 28pt;
+    margin: 0px;
+    color: white;
+}
+#board{
+    margin-left: 70px;
+    margin-top: 5px;
+}
+#info{
+    margin-top: 3px;
+    margin-left: 82px;
+    font-size: 10pt;
+    color: white;
+}
