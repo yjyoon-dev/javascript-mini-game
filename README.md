@@ -1,6 +1,6 @@
-# vanillaJS Game
-Build simple games with vanillaJS
+# VanillaJS Game
+Build simple games with VanillaJS
 
 - 2048
-- Dummy
+- Snake
 - Tetris
