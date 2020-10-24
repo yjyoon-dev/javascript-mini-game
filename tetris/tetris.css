@@ -1,0 +1,73 @@
+body{
+    background-color: rgb(9,17,26);
+}
+td{
+    width: 14px;
+    height: 14px;
+}
+#gameField{
+    margin-left: 20px;
+    margin-top: 20px;
+    float: left;
+}
+#scoreField{
+    float: right;
+    background-color: rgb(14,31,49);
+    margin-top: 1.9px;
+    margin-left: 3px;
+    width: 100px;
+}
+#score, #level{
+    font-size: 28px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    height: 30px;
+}
+.sub{
+    font-size: 22px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(21,46,74);
+    padding: 10px;
+    margin: 0px;
+}
+#about{
+    font-size: 20px;
+}
+#about:hover{
+    color:rgb(199,82,82);
+}
+#nextTable{
+    float: right;
+    margin: 0px;
+    position: absolute;
+    left: 402px;
+    top: 358px;
+}
+#help{
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    height: 32px;
+    margin: 1px;
+}
+#comboField{
+    position: absolute;
+    left: 27px;
+    top: 320px;
+    width: 384px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+#pause, #gameover{
+    position: absolute;
+    left: 200px;
+    top: 200px;
+    visibility: hidden;
+    color: white;
+}
