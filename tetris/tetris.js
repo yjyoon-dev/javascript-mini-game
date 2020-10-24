@@ -50,11 +50,11 @@ init();
 document.onkeydown = keyDownEventHandler;
 function keyDownEventHandler(e){
     switch(e.keyCode){
-        case 37: setTimeout("moveLR(-1)",0);
-        case 39: setTimeout("moveLR(1)",0);
-        case 42: setTimeout("rotateShape()",0);
-        case 40: moveFast();
-        case 80: pause();
+        case 37: setTimeout("moveLR(-1)",0); break;
+        case 39: setTimeout("moveLR(1)",0); break;
+        case 32: setTimeout("rotateShape()",0); break;
+        case 40: moveFast(); break;
+        case 80: pause(); break;
     }
 }
 document.onkeyup = keyUpEventHandler;
@@ -130,7 +130,7 @@ function createShape(){
     for(var i=0;i<shape.length;i++){
         var sy = shapePoint[0]+shape[i][0];
         var sx = shapePoint[1]+shape[i][1];
-        console.log(sy,sx);
+        console.log(sy,sx,existField[sy][sx]);
         if(!isValidPoint(sy,sx)) gameOver();
         var el = gebi(parseInt(sy), parseInt(sx));
         el.style.background = shapeColor;
@@ -177,7 +177,7 @@ function moveDown(){
     for(var i=0;i<shapeCell.length;i++) shapeCell[i][0]++;
     shapePoint[0]++;
     showShape();
-    movingThread = setTimeout("moveDown()",movingThread);
+    movingThread = setTimeout("moveDown()",movingSpeed);
 }
 function rotateShape(){
     if(!canRotate()) return;
@@ -222,6 +222,7 @@ function canMove(dy,dx){
         var nx = shapeCell[i][1]+dx;
         if(!isValidPoint(ny,nx)) return false;
     }
+    return true;
 }
 function moveLR(delta){
     if(!canMove(0,delta) || isPaused) return;
@@ -256,7 +257,7 @@ function isFull(lineIndex){
     return true;
 }
 function removeLine(lineIndex){
-    for(var i=lineIndex;i>=1;i--){
+    for(var i=lineIndex-1;i>=1;i--){
         for(var j=1;j<W-1;j++){
             gebi(i+1,j).style.background = gebi(i,j).style.background;
             existField[i+1][j] = existField[i][j];
