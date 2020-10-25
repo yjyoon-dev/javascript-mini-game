@@ -46,7 +46,10 @@ var createPoint=[1,parseInt(W/2)-2];
 var currentShape, nextShape;
 var score, level, levelStack=0;
 var isPaused = false;
+
 init();
+
+// 키 입력 처리
 document.onkeydown = keyDownEventHandler;
 function keyDownEventHandler(e){
     switch(e.keyCode){
@@ -61,6 +64,8 @@ document.onkeyup = keyUpEventHandler;
 function keyUpEventHandler(e){
     if(e.keyCode == 40) moveSlow();
 }
+
+// 초기 설정
 function init(){
     drawField();
     initExistField();
@@ -74,10 +79,13 @@ function init(){
     chooseNextColor();
     createShape();
 }
+
 function gebi(y,x){
     var ret = document.getElementById(String(y)+" "+String(x));
     return ret;
 }
+
+// 필드 초기화
 function initExistField(){
     existField = new Array(H);
     for(var i=0;i<H;i++)
@@ -110,6 +118,8 @@ function setWall(){
         existField[H-1][i]=true;
     }
 }
+
+// 도형 생성
 function chooseNextShape(){
     nextShape = parseInt(Math.random() * shapeArray.length);
 }
@@ -130,7 +140,6 @@ function createShape(){
     for(var i=0;i<shape.length;i++){
         var sy = shapePoint[0]+shape[i][0];
         var sx = shapePoint[1]+shape[i][1];
-        console.log(sy,sx,existField[sy][sx]);
         if(!isValidPoint(sy,sx)) gameOver();
         var el = gebi(parseInt(sy), parseInt(sx));
         el.style.background = shapeColor;
@@ -139,16 +148,6 @@ function createShape(){
     levelStack++;
     leveling();
     movingThread = setTimeout("moveDown()",movingSpeed);
-}
-function leveling(){
-    if(level==10) return;
-    if(levelStack == level * 10){
-        level++;
-        levelStack=0;
-        if(!fastMode)
-            movingSpeed = initSpeed - (level*deltaSpeed);
-    }
-    document.getElementById("level").innerHTML = level;
 }
 function displayNextShape(){
     initNextTable();
@@ -165,6 +164,8 @@ function initNextTable(){
         for(var j=0;j<4;j++)
             document.getElementById(String(i)+String(j)).style.background = "rgb(14,31,49)";
 }
+
+// 도형 조작
 function moveDown(){
     if(!canMove(1,0)){
         commitExist();
@@ -231,6 +232,22 @@ function moveLR(delta){
     shapePoint[1]+=delta;
     showShape();
 }
+function moveFast(){
+    if(fastMode) return;
+    clearTimeout(movingThread);
+    movingSpeed = fastSpeed;
+    movingThread = setTimeout("moveDown()",movingSpeed);
+    fastMode = true;
+}
+function moveSlow(){
+    if(!fastMode) return;
+    clearTimeout(movingThread);
+    movingSpeed = initSpeed - (level*deltaSpeed);
+    movingThread = setTimeout("moveDown()",movingSpeed);
+    fastMode = false;
+}
+
+// 점수 판정
 function commitExist(){
     for(var i=0;i<shapeCell.length;i++){
         var y = shapeCell[i][0];
@@ -264,6 +281,16 @@ function removeLine(lineIndex){
         }
     }
 }
+function leveling(){
+    if(level==10) return;
+    if(levelStack == level * 10){
+        level++;
+        levelStack=0;
+        if(!fastMode)
+            movingSpeed = initSpeed - (level*deltaSpeed);
+    }
+    document.getElementById("level").innerHTML = level;
+}
 function updateScore(plusScore,combo){
     var comboScore = plusScore * combo;
     score += comboScore;
@@ -275,26 +302,14 @@ function displayCombo(combo, finalScore){
     document.getElementById("comboField").innerHTML = comboStr;
     setTimeout(function(){document.getElementById("comboField").innerHTML = "";},700);
 }
+
+// 종료 및 일시정지
 function gameOver(){
     clearTimeout(movingThread);
     initExistField();
     alert("[Game Over]\nLevel: "+level+"\nScore: "+score);
     document.getElementById("gameField").style.visibility = "hidden";
     document.getElementById("gameover").style.visibility = "visible";
-}
-function moveFast(){
-    if(fastMode) return;
-    clearTimeout(movingThread);
-    movingSpeed = fastSpeed;
-    movingThread = setTimeout("moveDown()",movingSpeed);
-    fastMode = true;
-}
-function moveSlow(){
-    if(!fastMode) return;
-    clearTimeout(movingThread);
-    movingSpeed = initSpeed - (level*deltaSpeed);
-    movingThread = setTimeout("moveDown()",movingSpeed);
-    fastMode = false;
 }
 function pause(){
     if(isPaused){
